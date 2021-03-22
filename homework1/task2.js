@@ -36,4 +36,17 @@ import fs from "fs/promises";
     writeStream.end();
     console.log("Complete!");
   }
+
+  function closeHandler(){
+    console.log("exiting");
+    readStream.close();
+    writeStream.end();
+    readStream.on('close',()=>{
+      process.exit(0);
+    })
+  }
+
+  process.on('SIGINT', closeHandler);
+  process.on('SIGTERM', closeHandler);
+
 })();

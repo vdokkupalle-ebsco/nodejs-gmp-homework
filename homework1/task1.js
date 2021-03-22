@@ -15,6 +15,14 @@ const prompt = ()=>{
     process.stdout.write("Enter a text!\n");
 }
 
+const closeHandler = ()=>{
+    console.info("exiting");
+    process.exit(0);
+}
+
 
 prompt();
 process.stdin.on('data',onReadData);
+
+process.on('SIGTERM', closeHandler);
+process.on('SIGINT', closeHandler);
